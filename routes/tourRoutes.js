@@ -3,6 +3,8 @@
 
 const express = require('express');
 const tourController = require('../controllers/tourController');
+
+const authController = require('../controllers/authController');
 // const app = express();
 
 // const tours = JSON.parse(
@@ -115,7 +117,7 @@ router.route('/monthly-plan/:year').get(tourController.getMonthlyPlans);
 
 router
   .route('/')
-  .get(tourController.getAllTours)
+  .get(authController.protect, tourController.getAllTours)
   .post(tourController.createTour);
 router
   .route('/:id')
