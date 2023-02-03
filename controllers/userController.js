@@ -3,6 +3,7 @@
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const factory = require('./handlerFactory')
 
 const filterObj = (obj, ...allowedFields) => {
   // console.log(obj, allowedFields);
@@ -65,15 +66,20 @@ exports.getSingleUser = (req, res) => {
     data: 'this route is not implemented yet',
   });
 };
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    data: 'this route is not implemented yet',
-  });
-};
-exports.deleteuser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    data: 'this route is not implemented yet',
-  });
-};
+// exports.updateUser = (req, res) => {
+//   res.status(500).json({
+//     status: 'error',
+//     data: 'this route is not implemented yet',
+//   });
+// };
+
+// Do not update passwords with this
+exports.updateUser = factory.updateOne(User)
+// exports.deleteuser = (req, res) => {
+//   res.status(500).json({
+//     status: 'error',
+//     data: 'this route is not implemented yet',
+//   });
+// };
+
+exports.deleteUser = factory.deleteOne(User)

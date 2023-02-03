@@ -5,6 +5,10 @@ const express = require('express');
 const tourController = require('../controllers/tourController');
 
 const authController = require('../controllers/authController');
+// const reviewController = require('../controllers/reviewController');
+const reviewRouter = require('./reviewRoutes')
+
+
 // const app = express();
 
 // const tours = JSON.parse(
@@ -128,5 +132,21 @@ router
     authController.restrictTo('admin', 'lead-guide'),
     tourController.deleteTour
   );
+
+
+  // nested routes to create review
+// POST /tour/dsd544/reviews
+// GET  /tour/dsd544/reviews
+// GET  /tour/dsd544/reviews/54654sds
+
+// router
+//   .route('/:tourId/reviews')
+//   .post(
+//     authController.protect,
+//     authController.restrictTo('user'),
+//     reviewController.createReview
+//   );
+
+router.use('/:tourId/reviews', reviewRouter);
 
 module.exports = router;
